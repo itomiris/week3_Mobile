@@ -1,45 +1,56 @@
 import 'dart:io';
 
-class Cuboid {
+void main(List<String> arguments) {
+  Cuboid cuboid = new Cuboid(0,0,0); 
+  Cube cube = new Cube(0, 0, 0); 
+  cuboid.first();
+  cube.second();
+}
+
+class Cuboid{
   int length;
   int width;
   int height;
 
   Cuboid(this.length, this.width, this.height);
+  void first(){
+    print('First Task');
+    print('Enter length of a Cuboid:');
+    var length = int.parse(stdin.readLineSync()!);
+    print('Enter width of Cuboid:');
+    var width = int.parse(stdin.readLineSync()!);
+    print('Enter height of Cuboid:');
+    var height = int.parse(stdin.readLineSync()!);
+    
+    print('Surface Area of Cuboid: ${getSurfaceArea(length, width, height)}');
+    print('Volume of the Cuboid: ${getVolume(length, width, height)}');
+  }
 
-  int get surfaceArea =>
-  2 * (this.length * this.width + this.width * this.height + this.length * this.height);
-  int get volume => this.length * this.width * this.height;
+  int getSurfaceArea( int length, int width,int height){
+    return 2 * (length * width + length * height + width * height);
+  }
+  int getVolume(int length, int width, int height){
+    return length * width * height;
+  }
 }
 
-void main() {
-  print("Enter a length: ");
-  var length = int.parse(stdin.readLineSync()!);
-  print("Enter a width: ");
-  var width = int.parse(stdin.readLineSync()!);
-  print("Enter a height: ");
-  var height = int.parse(stdin.readLineSync()!);
+class Cube extends Cuboid{
+  Cube(length, width, height): super(length,length,length);
+  void second(){
+    print('Second Task');
+    print('Please enter length of your Cube: ');
+    var length = int.parse(stdin.readLineSync()!);
+    print('Surface Area of your Cube: ${getSurfaceArea(length, length , length)}');
+    print('Volume of your Cube: ${getVolume(length, length, length)}');
+  }
 
-  print("First Task: ");
+  @override
+  int getSurfaceArea(int length,int width, int height){
+    return (length * length) * 6;
+  }
 
-  var cuboid = Cuboid(length, width, height);
-  print(cuboid.surfaceArea);
-  print(cuboid.volume);
-
-  print("Second Task: ");
-  print("Length you entered for a Cuboid will be a length of Cube.");
-  var cube = Cube(length, length, length);
-  cube.equal(length);
-  print(cube.surfaceArea);
-  print(cube.volume);
-}
-
-class Cube extends Cuboid {
-  Cube(int length, int width, int height) : super(length, length, length);
-
-  equal(int length) {
-    print("Length: ${this.length}");
-    print("Width: ${this.width}");
-    print("Height: ${this.height}");
+  @override
+  int getVolume(int length, int width , int height){
+    return length* length* length;
   }
 }
